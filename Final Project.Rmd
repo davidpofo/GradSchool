@@ -1,0 +1,169 @@
+---
+title: "Untitled"
+author: "david"
+date: "January 22, 2017"
+output: html_document
+---
+```{r}
+library(dplyr)
+library(reshape2)
+library(tidyr)
+library(ggplot2)
+library(BayesFactor)
+library(gridExtra)
+library(gdata)
+library(gvlma)
+```
+## Step 0  raw data to refined master sheet
+#Getting the 3 columns of interest for the three tasks (text, rating, rt) from the raw data 
+# SBM
+```{r}
+#set working dir, mass import, combine data sets in directory into one and export as combinedSBM.csv
+setwd("C:\\Users\\flyff\\Desktop\\MergedFiles")
+folderdir<-dir()#use directory
+combineddf <- do.call(rbind,lapply(folderdir,read.csv))#combine data frames in folderdir into the object combineddf
+write.table(combineddf,paste0(getwd(),'/combinedSBM.csv'), sep=",",row.names=FALSE)#Export the combineddf into the wd as a .csv file
+#Take the combinedSBM and apply a subsetting function to only to create 3 new columns with text, rating, and rt
+combinedSBM<-read.csv("C:\\Users\\flyff\\Desktop\\MergedFiles\\combinedSBM.csv")
+
+combinedSBM.subset <- combinedSBM[, -c(4:21)]#removing useless columns, only keeping the columns not 4:21
+
+
+combinedSBM.subset[, "okay"] <- apply(combinedSBM.subset[, 1:15], 1, function(x) { paste(x[!is.na(x)][c(1, 4,5)], collapse = ";") })
+combinedSBM.subset <- separate(combinedSBM.subset, okay, into = c("text", "rating", "rt"), sep = ";")#sepearting okay into three columns
+combinedSBM.subset<-combinedSBM.subset[,16:18]#Make the df only the 3 columns of interest
+combinedSBM.subset$participant<-combinedSBM$participant
+
+combinedSBM.subset<-combinedSBM.subset[4:nrow(combinedSBM.subset),]#removes top 3 NA rows for mike
+combinedSBM.subset<-combinedSBM.subset[-c(67,68,69),]#removes top 3 NA rows for ch1
+
+#sepearting the combined data set into each task
+mikesmm<-combinedSBM.subset[1:8,]#stress mindset
+mikebriefcope<-combinedSBM.subset[9:36,]#brief cope text
+mikemars<-combinedSBM.subset[36:65,]#MARS
+```
+
+#MA task
+```{r}
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\study\\Cognitive appraisals, working memory, and math\\data\\mama")
+folderdir<-dir()#use directory
+combineddf <- do.call(rbind,lapply(folderdir,read.csv))#combine data frames in folderdir into the object combineddf
+write.table(combineddf,paste0(getwd(),'/combinedMA.csv'), sep=",",row.names=FALSE)
+
+combinedMA<-read.csv("C:\\Users\\flyff\\Desktop\\LAB\\study\\Cognitive appraisals, working memory, and math\\data\\mama\\combinedMA.csv")#read in the combined dataset
+combinedMA.subset <- combinedMA[, c(26:32)]#removing useless columns, only keeping the columns not 4:21
+combinedMA.subset <- combinedMA.subset[, -c(3:5)]#removing useless columns, only keeping the columns not 4:21
+colnames(combinedMA.subset)<-c("base","base rt","exp", "exp rt")
+
+#adding back block ids
+combinedMA.subset$id <- combineddf$participant
+combinedMA.subset$baseorder <- as.factor(combineddf$Baseline_block.thisIndex)
+combinedMA.subset$exporder <- as.factor(combineddf$experimental_block.thisIndex)
+
+#split sub merge- Getting only the 4 columns of data for the whole dataset without NAs
+base<-combinedMA.subset[!(is.na(combinedMA.subset$`base rt`) | combinedMA.subset$`base rt`==""), ]#split
+exp<-combinedMA.subset[!(is.na(combinedMA.subset$`exp rt`) | combinedMA.subset$`exp rt`==""), ]
+
+base<-base[-c(3:4)]#subset out the two useless columns
+base<-base[-c(5)]
+exp<-exp[-c(1,2)]#each df contains the base or exp for all participants combined earlier
+exp<-exp[-c(4)]
+
+base$trial<-1:24#trial columns
+exp$trial<-1:24#trial columns
+
+#merge and null the trial column
+fullMA<-merge(base,exp,by="trial")
+```
+
+#data read, gather, and seperate
+```{r}
+masterdata<-read.csv("C:/Users/flyff/Desktop/LAB/study/Cognitive appraisals, working memory, and math/data/Master data sheet/Refined Master data sheet.csv")
+mastergather<-gather(masterdata, demand,accuracy,base.low:exp.high)
+mastergather<- separate(mastergather, demand, c("block", "demand"), sep = "\\.")
+mastergather$MA.task.condition<-as.factor(mastergather$MA.task.condition)
+```
+## Step 1 Bayesian model comparison, Linear Regression, and Dominance Analysis
+#Modular Arithmetic Accuracy BFS
+```{r}
+#all bf models with interactions
+allbf<-generalTestBF(accuracy ~Age+Gender+Hand+MA.task.condition+Shape.Builder+Stress.Mindset+MARS+block+demand, data = mastergather, whichModels = "all",progress = FALSE)
+
+which.max(allbf)#Which model has the highest BF
+headbf<-head(allbf,n=10)#show me the top 6 model BFs
+headbf# MA.task.condition + Shape.Builder + Stress.Mindset          : 21.3384 1.3%
+```
+
+```{r}
+#top model with interactions
+topbf<-generalTestBF(accuracy ~MA.task.condition*Shape.Builder+Shape.Builder*Stress.Mindset+MA.task.condition*Stress.Mindset,data=mastergather)
+topbf#all the interactions for the best model
+headint<-head(topbf,n=10)
+headint
+```
+
+```{r}
+#which single variable is the most important for predicting accuracy
+bottombf<-generalTestBF(accuracy ~Age+Gender+Hand+MA.task.condition+Shape.Builder+Stress.Mindset+MARS+block+demand, data = mastergather, whichModels = "bottom", progress = FALSE) # the Bayes factors for all models containing a single covariate
+bottombf
+which.max(bottombf)#MA.task.condition is the best stand-alone variable at 18.52256
+```
+
+#Linear Regression for accuracy
+```{r}
+#Accuracy~
+my.lmall<-(lm(accuracy~Age+Gender+Hand+MA.task.condition+Shape.Builder+Stress.Mindset+MARS+block+demand, data=mastergather))
+summary(my.lmall)#MA.task.condition1 Pr(>|t|)0.00025 ***  Stress.Mindset  Pr(>|t|) 0.03080 *
+anova(my.lmall)#MA.task.condition Pr(>|t|)0.00212 ** Stress.Mindset  Pr(>|t|) 0.02912 * Gender Pr(>|t|) 0.03266 *
+
+#The best model with interactions
+synlm<-lm(accuracy ~(MA.task.condition+Shape.Builder+Stress.Mindset+Gender)^2,data=mastergather)
+summary(synlm)
+anova(synlm)
+```
+#dominance analysis
+```{r}
+gv.fit<-gvlma(my.lmall)
+gv.fit
+deletion.gvlma(gv.fit)#Fitted the model with and without each observation identifying observations that violate assumptions of a linear model, to identify problematic data points. #27 is subject that might be up for elimination
+
+hist(my.lmall$residuals)#multi-modal
+
+shapiro.test(my.lmall$residuals)# Through the shapiro-wilk normality test we cannot reject the hypothesis that the sample comes from a population which has a normal didstribution p >.05. This lm has a p value less than .05 so we can reject normality of this distribution
+library(yhat)
+all.subsets.reg<-aps(mastergather,"accuracy",list("Age","Gender","Hand","MA.task.condition","Shape.Builder","Stress.Mindset","MARS","block","demand")) 
+dom.model<-dominance(all.subsets.reg)
+dom.model$CD#conditional dominance
+dom.model$GD#general dominance
+
+dombin(dom.model)#dom analysis
+```
+
+## Step 2 Plots and visualizations
+#Data treatment for plots
+```{r}
+master.means <- summarize(group_by(mastergather,MA.task.condition,block,demand), mean=mean(accuracy,na.rm=TRUE))
+```
+
+#Plots
+```{r}
+plot(topbf)
+plot(head(allbf,n=20))
+plot(bottombf)
+
+pointdf<-data.frame(x1="Baseline", y1=0.8233333,x2="Experimental",y2=0.7850000,x3="Baseline",y3=0.8011111,x4="Experimental",y4=0.7644444,x5="Baseline", y5=0.6288889,x6="Experimental",y6=0.7133333,x7="Baseline",y7=0.7244444,x8="Experimental",y8=0.6894444)
+
+
+plot0<-ggplot(master.means, aes(x = block, y = mean))  + scale_x_discrete(labels = c("Baseline","Experimental"))+xlab("Block")+ylab("Mean accuracy")+theme_minimal()+ggtitle("Mean accuracy by block and demand")+  geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2,color="Control High-Demand"), data = pointdf)+geom_segment(aes(x = x3, y = y3, xend = x4, yend = y4,color="Control Low-Demand"), data = pointdf)+geom_segment(aes(x = x5, y = y5, xend = x6, yend = y6,color="Stereotype High-Demand"), data = pointdf)+geom_segment(aes(x = x7, y = y7, xend = x8, yend = y8,color="Stereotype Low-Demand"), data = pointdf)
+plot0
+
+
+plot1<-ggplot(mastergather, aes(x=accuracy,fill=Gender)) + geom_density(adjust = .7)
+
+plot1
+
+plot2<-ggplot(master.means, aes(x=factor(block),y=mean,colour=demand)) +    geom_bar(stat="identity",position="dodge")+xlab("Block")+ylab("Mean accuracy")
+plot2
+
+grid.arrange(plot0,plot1,plot2)
+```
