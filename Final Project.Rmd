@@ -19,12 +19,12 @@ library(gvlma)
 # SBM
 ```{r}
 #set working dir, mass import, combine data sets in directory into one and export as combinedSBM.csv
-setwd("C:\\Users\\flyff\\Desktop\\MergedFiles")
+setwd("C:\\Users\\flyff\\Desktop\\UMD\\finalproject798Wdavida\\SBM")
 folderdir<-dir()#use directory
 combineddf <- do.call(rbind,lapply(folderdir,read.csv))#combine data frames in folderdir into the object combineddf
 write.table(combineddf,paste0(getwd(),'/combinedSBM.csv'), sep=",",row.names=FALSE)#Export the combineddf into the wd as a .csv file
 #Take the combinedSBM and apply a subsetting function to only to create 3 new columns with text, rating, and rt
-combinedSBM<-read.csv("C:\\Users\\flyff\\Desktop\\MergedFiles\\combinedSBM.csv")
+combinedSBM<-read.csv("C:\\Users\\flyff\\Desktop\\UMD\\finalproject798Wdavida\\SBM\\combinedSBM.csv")
 
 combinedSBM.subset <- combinedSBM[, -c(4:21)]#removing useless columns, only keeping the columns not 4:21
 
@@ -45,12 +45,12 @@ mikemars<-combinedSBM.subset[36:65,]#MARS
 
 #MA task
 ```{r}
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\study\\Cognitive appraisals, working memory, and math\\data\\mama")
+setwd("C:\\Users\\flyff\\Desktop\\UMD\\finalproject798Wdavida\\MA")
 folderdir<-dir()#use directory
 combineddf <- do.call(rbind,lapply(folderdir,read.csv))#combine data frames in folderdir into the object combineddf
 write.table(combineddf,paste0(getwd(),'/combinedMA.csv'), sep=",",row.names=FALSE)
 
-combinedMA<-read.csv("C:\\Users\\flyff\\Desktop\\LAB\\study\\Cognitive appraisals, working memory, and math\\data\\mama\\combinedMA.csv")#read in the combined dataset
+combinedMA<-read.csv("C:\\Users\\flyff\\Desktop\\UMD\\finalproject798Wdavida\\MA\\combinedMA.csv")#read in the combined dataset
 combinedMA.subset <- combinedMA[, c(26:32)]#removing useless columns, only keeping the columns not 4:21
 combinedMA.subset <- combinedMA.subset[, -c(3:5)]#removing useless columns, only keeping the columns not 4:21
 colnames(combinedMA.subset)<-c("base","base rt","exp", "exp rt")
