@@ -1,0 +1,498 @@
+---
+title: "Untitled"
+author: "david"
+date: "February 13, 2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r, Approximate arithmetic}
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Approximate Arithmetic\\data")
+library(tools)
+folderdir<-dir()#use directory
+
+read_csv_filename <- function(filename){
+    ret <- read.csv(filename)
+    ret$Id <- file_path_sans_ext(basename(filename))#Creating ID column & Taking out extension for IDs
+    ret}#function to add file name as a new column
+
+CombinedAA <- plyr::ldply(folderdir, read_csv_filename)
+#Changing infs and null to NAs and removing practice problems
+#In computer lab A participants' practice problems are printed as well (i.e "17" "18" "22" "24" "28" "32" #"34" "39" "41" "44" "45" "54" "57" "59")
+CombinedAA<-do.call(data.frame,lapply(CombinedAA, function(x) replace(x, is.infinite(x),NA)))#change infs to NAs
+CombinedAA[CombinedAA== "null"] <- NA#The null Responses as NAs
+CombinedAA<-CombinedAA[!(CombinedAA$Problem=="0")&complete.cases(CombinedAA$Problem),]#removing the 140 rows = 10 practice trials x 14 participants & keeping only the rows with a problem # 
+library(dplyr)
+CombinedAA<-CombinedAA %>%
+  group_by(Id) %>%
+  summarise_at(vars(Accuracy,RT), funs(mean(., na.rm=TRUE)))
+colnames(CombinedAA)[2]<-"AA.Accuracy"
+colnames(CombinedAA)[3]<-"AA.RT"
+```
+
+```{r, Symmetry Span}
+# Set the working directory of R to the folder that hosts the output files from the symmetry span task #
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Symmetry Span\\data")
+#Reads in all the csv files in the current wd and rbinds them into one big data frame
+temp = list.files(pattern="*.csv")
+for (i in 1:length(temp)) assign(temp[i], read.csv(temp[i]))
+#Correct the df subject ids based on the notes
+# Room A
+`4.26.SS.A.csv`$session.subject.subject.code[`4.26.SS.A.csv`$session.subject.subject.code == 1]<-41
+# Room B
+`4.26.SS.B.csv`$session.subject.subject.code[`4.26.SS.B.csv`$session.subject.subject.code == 2 &`4.26.SS.B.csv`$session.id == 3  ]<-4
+`4.26.SS.B.csv`$session.subject.subject.code[`4.26.SS.B.csv`$session.subject.subject.code == 2 &`4.26.SS.B.csv`$session.id == 7  ]<-9
+`4.26.SS.B.csv`$session.subject.subject.code[`4.26.SS.B.csv`$session.subject.subject.code == 2 &`4.26.SS.B.csv`$session.id == 11  ]<-13
+`4.26.SS.B.csv`$session.subject.subject.code[`4.26.SS.B.csv`$session.subject.subject.code == 2 &`4.26.SS.B.csv`$session.id == 12  ]<-19
+# Room C
+`4.26.SS.C.csv`$session.subject.subject.code[`4.26.SS.C.csv`$session.subject.subject.code == 3 &`4.26.SS.C.csv`$session.id == 4  ]<-7
+`4.26.SS.C.csv`$session.subject.subject.code[`4.26.SS.C.csv`$session.subject.subject.code == 3 &`4.26.SS.C.csv`$session.id == 25  ]<-8
+`4.26.SS.C.csv`$session.subject.subject.code[`4.26.SS.C.csv`$session.subject.subject.code == 3 &`4.26.SS.C.csv`$session.id == 6  ]<-10
+`4.26.SS.C.csv`$session.subject.subject.code[`4.26.SS.C.csv`$session.subject.subject.code == 15 &`4.26.SS.C.csv`$session.id == 9  ]<-16
+# Room D
+`4.26.SS.D.csv`$session.subject.subject.code[`4.26.SS.D.csv`$session.subject.subject.code == 4 &`4.26.SS.D.csv`$session.id == 1  ]<-20
+# Room E
+`4.26.SS.E.csv`$session.subject.subject.code[`4.26.SS.E.csv`$session.subject.subject.code == 5 &`4.26.SS.E.csv`$session.id == 1  ]<-40
+`4.26.SS.E.csv`$session.subject.subject.code[`4.26.SS.E.csv`$session.subject.subject.code == 5 &`4.26.SS.E.csv`$session.id == 2  ]<-42
+# Room F
+`4.26.SS.F.csv`$session.subject.subject.code[`4.26.SS.F.csv`$session.subject.subject.code == 6 &`4.26.SS.F.csv`$session.id == 2  ]<-21
+`4.26.SS.F.csv`$session.subject.subject.code[`4.26.SS.F.csv`$session.subject.subject.code == 5]<-36
+`4.26.SS.F.csv`$session.subject.subject.code[`4.26.SS.F.csv`$session.subject.subject.code == 6 &`4.26.SS.F.csv`$session.id == 9  ]<-43
+#Setting wd to where I want the new dfs
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Symmetry Span\\SSpanCleaned")
+
+#Separate into a list of dfs by their subject dfs and then writing new dfs for each participant
+datA<-split.data.frame(`4.26.SS.A.csv`, `4.26.SS.A.csv`$session.subject.subject.code)
+datB<-split.data.frame(`4.26.SS.B.csv`, `4.26.SS.B.csv`$session.subject.subject.code)
+datC<-split.data.frame(`4.26.SS.C.csv`, `4.26.SS.C.csv`$session.subject.subject.code)
+datD<-split.data.frame(`4.26.SS.D.csv`, `4.26.SS.D.csv`$session.subject.subject.code)
+datE<-split.data.frame(`4.26.SS.E.csv`, `4.26.SS.E.csv`$session.subject.subject.code)
+datF<-split.data.frame(`4.26.SS.F.csv`, `4.26.SS.F.csv`$session.subject.subject.code)
+#makes a list to iterate and paste 
+dat.list<-c(datA,datB,datC,datD,datE,datF)
+for(i in names(dat.list)){
+  write.csv(dat.list[[i]], paste0(i,".csv"))
+}
+
+# Remove old dfs
+rm(`4.26.SS.A.csv`,`4.26.SS.B.csv`,`4.26.SS.C.csv`,`4.26.SS.D.csv`,`4.26.SS.E.csv`,`4.26.SS.F.csv`)
+## Read in the new participant dfs
+read_csv_filename <- function(filename){
+  ret <- read.csv(filename)
+  ret$Id <- filename #EDIT
+  ret}#function to add file name as a new column
+folderdir<-dir()#use directory
+combineddf <- plyr::ldply(folderdir, read_csv_filename)
+#required library
+library(stringr)
+
+### function that takes the data frame from an output file and returns that persons summary info ###
+symm_span_processing <- function(data.frame) {
+
+	#split storage rows from processing rows
+	df.recall <- subset(data.frame, trial.name == "module.list.comp.exec.symm_span")
+	df.processing <- subset(data.frame, trial.name =="module.list.comp.exec.symm_processing")
+	
+	num.trials <- nrow(df.recall)
+	
+	fta.score <- 0 
+	for (i in 1:num.trials) {
+		if (df.recall$trial.symm_span.result[i] == "success") {
+			fta.score <- fta.score + df.recall$trial.symm_span.load[i]
+		}
+	}
+	
+	#highest load with a fully correct response
+	if (length(df.recall$trial.symm_span.load[df.recall$trial.symm_span.result == "success"]) == 0) {
+		#no successes
+		max.span <- NA
+	} else {
+		max.span <- max(df.recall$trial.symm_span.load[df.recall$trial.symm_span.result == "success"]) 
+	}	
+
+	#span two trials correct
+	if (nrow(subset(df.recall, trial.symm_span.load == 2)) == 0) {
+		#then there were no span size 2 trials, therefore
+		span.2.corr <- NA
+	} else {
+		span.2.corr <- sum(df.recall$trial.symm_span.points[df.recall$trial.symm_span.load == 2])
+	}
+	#span three trials correct
+	if (nrow(subset(df.recall, trial.symm_span.load == 3)) == 0) {
+		#then there were no span size 3 trials, therefore
+		span.3.corr <- NA
+	} else {
+		span.3.corr <- sum(df.recall$trial.symm_span.points[df.recall$trial.symm_span.load == 3])
+	}	
+	#span four trials correct
+	if (nrow(subset(df.recall, trial.symm_span.load == 4)) == 0) {
+		#then there were no span size 4 trials, therefore
+		span.4.corr <- NA
+	} else {
+		span.4.corr <- sum(df.recall$trial.symm_span.points[df.recall$trial.symm_span.load == 4])
+	}	
+	#span five trials correct
+	if (nrow(subset(df.recall, trial.symm_span.load == 5)) == 0) {
+		#then there were no span size 5 trials, therefore
+		span.5.corr <- NA
+	} else {
+		span.5.corr <- sum(df.recall$trial.symm_span.points[df.recall$trial.symm_span.load == 5])
+	}
+	#span six trials correct
+	if (nrow(subset(df.recall, trial.symm_span.load == 6)) == 0) {
+		#then there were no span size 6 trials, therefore
+		span.6.corr <- NA
+	} else {
+		span.6.corr <- sum(df.recall$trial.symm_span.points[df.recall$trial.symm_span.load == 6])
+	}	
+	#span seven trials correct
+	if (nrow(subset(df.recall, trial.symm_span.load == 7)) == 0) {
+		#then there were no span size 7 trials, therefore
+		span.7.corr <- NA
+	} else {
+		span.7.corr <- sum(df.recall$trial.symm_span.points[df.recall$trial.symm_span.load == 7])
+	}	
+	#span eight trials correct
+	if (nrow(subset(df.recall, trial.symm_span.load == 8)) == 0) {
+		#then there were no span size 8 trials, therefore
+		span.8.corr <- NA
+	} else {
+		span.8.corr <- sum(df.recall$trial.symm_span.points[df.recall$trial.symm_span.load == 8])
+	}
+	#span nine trials correct
+	if (nrow(subset(df.recall, trial.symm_span.load == 9)) == 0) {
+		#then there were no span size 9 trials, therefore
+		span.9.corr <- NA
+	} else {
+		span.9.corr <- sum(df.recall$trial.symm_span.points[df.recall$trial.symm_span.load == 9])
+	}
+	
+	#get processing accuracy
+	proc.points <- numeric(nrow(df.processing))
+	for (i in 1:nrow(df.processing)) {
+		if (df.processing$trial.symm_processing.result[i] == "success") {
+			proc.points[i] <- 1
+		} else {
+			proc.points[i] <- 0
+		}
+	}
+	df.processing$points <- proc.points
+	
+	processing.accuracy <- sum(df.processing$points) / nrow(df.processing) 
+	processing.median.rt <- median(df.processing$trial.symm_processing.durationTime)	
+
+	###finally, to get prop score, and number individual successes need to break down the recall 
+	###segment to a per element basis, not the per trial basis we get as output.
+	
+	#create a new data frame where every row is one response within a trial
+	
+	#number of rows will be the sum of the loads
+	num.elements <- sum(df.recall$trial.symm_span.load)
+	
+	ID <- numeric(num.elements)
+	trial.no <- numeric(num.elements)
+	load <- numeric(num.elements)
+	question <- numeric(num.elements)
+	response <- numeric(num.elements)
+	success <- numeric(num.elements)
+	counter <- 1
+	
+	for (i in 1:nrow(df.recall)) {
+	
+		num_elements <- df.recall$trial.symm_span.load[i]
+		tmp_question <- as.character(df.recall$trial.symm_span.question[i])
+		tmp_response <- as.character(df.recall$trial.symm_span.response[i])
+		q <- str_split_fixed(tmp_question,", ", num_elements)
+		r <- str_split_fixed(tmp_response,", ", num_elements)
+		
+		if (nchar(q[1]) == 2) {
+		  q[1] <- substr(q[1],2,2)
+		} else if (nchar(q[1]) == 3) {
+		  q[1] <- substr(q[1],2,3)
+		}
+		
+		if (nchar(r[1]) == 2) {
+		  r[1] <- substr(r[1],2,2)
+		} else if (nchar(r[1]) == 3) {
+		  r[1] <- substr(r[1],2,3)
+		}
+		
+		if (nchar(q[num_elements]) == 2) {
+		  q[num_elements] <- substr(q[num_elements],1,1)
+		} else if (nchar(q[num_elements]) == 3) {
+		  q[num_elements] <- substr(q[num_elements],1,2)
+		} else if (nchar(q[num_elements]) == 4) {
+		  q[num_elements] <- substr(q[num_elements],1,3)
+		}
+		
+		if (nchar(r[num_elements]) == 2) {
+		  r[num_elements] <- substr(r[num_elements],1,1)
+		} else if (nchar(r[num_elements]) == 3) {
+		  r[num_elements] <- substr(r[num_elements],1,2)
+		} else if (nchar(r[num_elements]) == 4) {
+		  r[num_elements] <- substr(r[num_elements],1,3)
+		}
+		
+		q.vec <- as.numeric(q)
+		r.vec <- as.numeric(r)
+		
+		for (j in 1:df.recall$trial.symm_span.load[i]) {
+			ID[counter] <- df.recall$user.yearOfBirth[1]
+			trial.no[counter] <- df.recall$trial.symm_span.trialNo[i]
+			load[counter] <- df.recall$trial.symm_span.load[i]
+			question[counter] <- q.vec[j]
+			response[counter] <- r.vec[j]
+			success[counter] <- q.vec[j] == r.vec[j]
+			counter <- counter + 1
+		}
+	}
+	
+	df.recall.indi <- as.data.frame(cbind(ID,trial.no,load,question,response,success))
+	
+	number.successes <- sum(df.recall.indi$success)
+	
+	props <- numeric(num.trials)
+	
+	for (i in 1:num.trials) {
+		this.trial.load <- nrow(subset(df.recall.indi, trial.no == i))
+		this.trial.successes <- sum(df.recall.indi$success[df.recall.indi$trial.no == i])
+		props[i] <- this.trial.successes / this.trial.load
+	}
+	
+	prop.score <- mean(props)
+	
+	
+	
+	p.summary <- c(fta.score, prop.score, number.successes, processing.accuracy, processing.median.rt, 
+	max.span, span.2.corr, span.3.corr, span.4.corr, span.5.corr, span.6.corr, span.7.corr, span.8.corr, 
+	span.9.corr)
+	
+	return(p.summary)		
+
+}
+
+
+##now can use that function on all our data files for symm span
+#put all symm span files into one folder and set that folder as working directory
+
+compile_symm_span_data <- function() {
+
+	multiple.sessions <- character()
+	filenames <- list.files()
+	CombinedSS <- matrix(nrow=length(filenames), ncol=14) #ncol needs to be number of values in p.summary above
+	user <- character()
+	
+	for (i in 1:length(filenames)) {
+		
+		tmp.df <- read.csv(filenames[i])
+		user[i] <- toString(tmp.df$session.subject.subject.code[1])
+		
+		if (length(unique(tmp.df$session.id)) > 1) {
+			multiple.sessions[length(multiple.sessions) + 1] <- filenames[i]
+		}
+
+		tmp.symm.summary <- symm_span_processing(tmp.df)
+		
+		CombinedSS[i, ] <- tmp.symm.summary
+	
+	}
+	
+	CombinedSS <- as.data.frame(CombinedSS)
+	CombinedSS$user <- user
+	
+	symm.names <- c("fta.score", "prop.score", "number.successes", "processing.accuracy", "processing.median.rt", 
+	"max.span", "span.2.corr", "span.3.corr", "span.4.corr", "span.5.corr", "span.6.corr", "span.7.corr", "span.8.corr", 
+	"span.9.corr", "ID")
+
+	names(CombinedSS) <- symm.names
+	
+	if (length(multiple.sessions > 0)) {
+		cat("The following files contained trials with more than one session id: \n", multiple.sessions)
+	}
+	
+	return(CombinedSS)	
+
+}
+CombinedSS <- compile_symm_span_data()
+myvars2 <- c("prop.score","ID")
+CombinedSS2 <- CombinedSS[myvars2]
+colnames(CombinedSS2)<-c("prop.score","Id")
+rm(compile_symm_span_data, symm_span_processing,combineddf,CombinedSS)#Just removing some data frames that are unnecessary
+```
+
+```{r, ShapeBuilder}
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Shape Builder\\data")
+folderdir<-dir()#use directory
+
+read_csv_filename <- function(filename){
+    ret <- read.csv(filename)
+    ret}#function to add file name as a new column
+CombinedShape <- plyr::ldply(folderdir, read_csv_filename)
+CombinedShape<-CombinedShape[complete.cases(CombinedShape[c("FinalScore","participant")]),]#only allow complete cases of columns with final score and participant
+#shapekeep <- c("FinalScore","participant")#object of column names to subset out
+CombinedShape<-CombinedShape[,c("FinalScore","participant")]#the participant's final score for SHAPE BUILDER
+colnames(CombinedShape)[2]<-"Id"
+colnames(CombinedShape)[1]<-"Shape"
+```
+
+```{r,Modular Arithmetic}
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Mod task\\data")
+folderdir<-dir()#use directory
+CombinedMA <- do.call(plyr::rbind.fill,lapply(folderdir,read.csv))#combine data frames in folderdir into the object CombinedMA
+#get manipulation for each participant
+CombinedMA<-CombinedMA[complete.cases(CombinedMA$TestKey.corr),]
+CombinedMA<-CombinedMA[c("Identity","TestKey.corr","TestKey.rt","TestBlock.thisIndex","participant")]
+names(CombinedMA)[1]<-"Difficulty"#Difficulty for each trial
+names(CombinedMA)[2]<-"MA.Accuracy"#accuracy for each trial
+names(CombinedMA)[3]<-"MA.ReactionTime"#change to Order
+names(CombinedMA)[4]<-"TestOrder"#change to Order
+names(CombinedMA)[5]<-"Id"#change to id
+
+#Summarising by Id and Problem Diffulty for Accuracy and ReactionTime
+library(dplyr)
+#CombinedMA<-CombinedMA %>%
+ # group_by(Id,Difficulty) %>%
+  #summarise_at(vars(MA.Accuracy,MA.ReactionTime), funs(mean(., na.rm=TRUE)))
+
+
+#Same summarization without splitting by Difficulty
+CombinedMA2<-CombinedMA %>%
+  group_by(Id) %>%
+  summarise_at(vars(MA.Accuracy,MA.ReactionTime), funs(mean(., na.rm=TRUE)))
+rm(CombinedMA)
+```
+
+```{r, Merge all data into master data set}
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\MT_Analysis")
+#Merging all data sets
+masterappend<-Reduce(function(x, y) merge(x, y, all=TRUE), list(CombinedAA,CombinedSS2,CombinedShape,CombinedMA2))#uses the merge function on each item in the list
+masterappend<-masterappend[!(masterappend$Id==11),]#taking out Id 11 since they didn't do AA at all
+
+#Making z-score composite
+library(multicon)
+
+vars<-data.frame(masterappend$prop.score,masterappend$Shape)
+VSWM <- composite(vars, rel = TRUE,Zitems = TRUE)
+rm(vars)#removing vars because it is extra
+#Visuospatial working z-score composite of Symmetry span and Shape Builder
+masterappend$VSWM<-VSWM#inserting z-score comp into master data sheet for analysis
+myvars <- c("AA.Accuracy","AA.RT","prop.score","Shape","MA.Accuracy", "MA.ReactionTime","VSWM")
+write.table(masterappend,paste0(getwd(),'/masterappend.csv'), sep=",",row.names=FALSE)#overwritting current excel sheet
+
+#standardizing data for analysis
+masterappend$AA.Accuracy<-scale(masterappend$AA.Accuracy)
+masterappend$MA.Accuracy<-scale(masterappend$MA.Accuracy)
+masterappend$VSWM<-scale(masterappend$VSWM)
+masterappend$MA.ReactionTime<-scale(masterappend$MA.ReactionTime)
+masterappend$AA.RT<-scale(masterappend$AA.RT)
+```
+
+```{r, Correlogram and Correlation Table}
+library(corrgram)
+myvars <- c("AA.Accuracy","MA.Accuracy","VSWM")
+#cor(newdata)#correlaiton table
+corrgram(masterappend[myvars], labels=c("ANS Acc", "Modular Arithmetic Acc", "Visuospatial WM Acc"),lower.panel=panel.pts, upper.panel=panel.conf,
+         diag.panel=panel.density, main="Correlogram of all variables")
+# For apa tables below
+library(apaTables)
+apa.cor.table(masterappend[myvars], filename = "CorrelationTable.doc", table.number = 0)
+```
+
+```{r, Mediation analysis}
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\MT_Analysis")
+
+###Baron and Kenny's method with regression
+#Cond1
+m1Condition1<-lm(MA.Accuracy~AA.Accuracy,data=masterappend)
+apa.reg.table(m1Condition1,filename="m1Condition1Table.doc",table.number = 1)
+#Cond2
+m1Condition2<-lm(VSWM~AA.Accuracy,data=masterappend)
+apa.reg.table(m1Condition2,filename="m1Condition2Table.doc",table.number = 2)
+
+#Cond3
+m1Condition3<-lm(MA.Accuracy~AA.Accuracy+VSWM,data=masterappend)
+apa.reg.table(m1Condition3,filename="m1Condition3Table.doc",table.number = 3)
+
+# Empirical M-test
+# Confidence Interval for the Mediated Effect
+
+library(RMediation)
+# Unstandardized coefficients
+a = summary(m1Condition2)$coefficients[2,1]
+se.a = summary(m1Condition2)$coefficients[2,2]
+b = summary(m1Condition3)$coefficients[3,1]
+se.b = summary(m1Condition3)$coefficients[3,2]
+res<-medci(mu.x=a, mu.y=b, se.x=se.a, se.y=se.b, rho=0, alpha=.05,
+      type="prodclin", plot=TRUE, plotCI=TRUE)#essentially the same as nonparametric boostrap confidence intervals because all the predictors are continuous 
+```
+
+```{r,Nonparametric Bootstrap Confidence Intervals}
+library(mediation)
+lmM<- lm(VSWM ~ AA.Accuracy, data=masterappend)# Mediator Model
+lmT<- lm(MA.Accuracy ~ AA.Accuracy +VSWM, data=masterappend)# Outcome model
+# m.out<-mediate(lmM, lmT, sims=10000, boot=TRUE, treat="AA.Accuracy", mediator= "VSWM", boot.ci.type= "perc")
+# summary(m.out)
+#plot(m.out, treatment = NULL, labels = NULL,
+ #   effect.type = c("indirect","direct","total"),
+  #  xlim = NULL, ylim = NULL, xlab = "", ylab = "",
+   # main = "Confidence Interval plot for Mediation Analysis", lwd = 1.5, cex = .85,
+    #col = "black")
+```
+
+```{r,Estimate and display direct and indirect effects of mediators }
+library(psych)
+# Analyses 
+#m.1<-mediate(y="MA.Accuracy",x="AA.Accuracy",m="VSWM",data=masterappend,n.iter = 10000,std = FALSE)
+#mediate.diagram(m.1,main = "Mediation Model with VSWM Composite",r.type="residual", labels("1"))
+```
+
+```{r, Bayesian Model Comparison}
+library(BayesFactor)
+Models<-generalTestBF(MA.Accuracy~AA.Accuracy+VSWM,data=masterappend)
+Models
+# plot of all models predicting modular arithmetic
+plot(Models)
+#Make row name (Model variables) into column
+library(dplyr)
+BayesTable <- add_rownames(as.data.frame(Models), "Model")
+write.table(BayesTable,paste0(getwd(),'/BayesTable.csv'), sep=",",row.names=FALSE)#overwritting current excel sheet
+# Comparisons
+M1M2 <- Models[1]/Models[2]
+M1M3 <-Models[1]/Models[3]
+M2M3 <- Models[2]/Models[3] 
+```
+
+```{r,Sensitivity Analysis}
+#s.out  <- medsens(m.out)
+#summary(s.out)# the summary function can be used to produce a table with the values of ?? for which the confidence interval contains zero. As we can see in the plot of the sensitivity analysis as ACME(p) takes on the value .5 rho is .4 and as it takes the value -.0229 rho is .5. When it is 0 we are estimating the mediation effect under the sequential ignorability assumption
+#plot(s.out, sens.par = "rho")# In the plot, the dashed horizontal line represents the estimated mediation effect under the sequential ignorability assumption, and the solid line represents the mediation effect under various values of ??. The grey region represents the 95% confidence bands
+#plot(s.out, sens.par = "R2", r.type = "residual", sign.prod = "positive")
+```
+
+```{r,Dominance Analysis}
+library(gvlma)
+model.lm <- lm(MA.Accuracy~AA.Accuracy+VSWM,data=masterappend) 
+gv.fit<-gvlma(model.lm)
+gv.fit
+deletion.gvlma(gv.fit)#Fitted the model with and without each observation identifying observations that violate assumptions of a linear model, to identify problematic data points. It identified line 19 and 96 for deletion which is subject 14 and 84 respectively.
+
+shapiro.test(gv.fit$residuals)# Through the shapiro-wilk normality test we see this lm has a p value more than .05 so we cannot reject normality of this distribution
+library(yhat)
+all.subsets.reg<-aps(masterappend,"MA.Accuracy",list("AA.Accuracy","VSWM")) #DV and list of IVs
+dom.model<-dominance(all.subsets.reg)
+dom.model$DA#Dominance analysis table
+dom.model$CD#conditional dominance
+dom.model$GD#general dominance
+dombin(dom.model)#dom analysis
+plot(gv.fit)
+```
+
+```{r,Residual Analysis}
+library(influence.ME)
+inf_meas<-influence.measures(model.lm)
+inf_meas
+hist(model.lm$residuals)#multi-modal
+plot(model.lm)
+```
+
