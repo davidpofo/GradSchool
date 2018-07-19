@@ -8,7 +8,8 @@ output:
 ---
 
 ```{r,Approximate arithmetic}
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Approximate Arithmetic\\data")
+# Set the working directory of R to the folder that hosts the raw Approximate Arithmetic Data
+#setwd("C:\\Users\\PC-user\\Desktop\\Approximate Arithmetic\\data")
 library(tools)
 folderdir<-dir()#use directory
 
@@ -32,8 +33,10 @@ colnames(CombinedAA)[3]<-"AA.RT"
 ```
 
 ```{r,Symmetry Span}
-# Set the working directory of R to the folder that hosts the output files from the symmetry span task #
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Symmetry Span\\data")
+# This task has multiple participants in each of the 6 computers (A-F)
+# Set the working directory of R to the folder that hosts the raw Symmetry Span Data
+# setwd("C:\\Users\\PC-user\\Desktop\\Symmetry Span\\data")
+
 #Reads in all the csv files in the current wd and rbinds them into one big data frame
 temp = list.files(pattern="*.csv")
 for (i in 1:length(temp)) assign(temp[i], read.csv(temp[i]))
@@ -59,8 +62,8 @@ for (i in 1:length(temp)) assign(temp[i], read.csv(temp[i]))
 `4.26.SS.F.csv`$session.subject.subject.code[`4.26.SS.F.csv`$session.subject.subject.code == 6 &`4.26.SS.F.csv`$session.id == 2  ]<-21
 `4.26.SS.F.csv`$session.subject.subject.code[`4.26.SS.F.csv`$session.subject.subject.code == 5]<-36
 `4.26.SS.F.csv`$session.subject.subject.code[`4.26.SS.F.csv`$session.subject.subject.code == 6 &`4.26.SS.F.csv`$session.id == 9  ]<-43
-#Setting wd to where I want the new dfs
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Symmetry Span\\SSpanCleaned")
+# Setting wd to where I want the new data frames to go to.
+# setwd("C:\\Users\\PC-user\\Desktop\\Symmetry Span\\data\\SSpan Cleaned")
 
 #Separate into a list of dfs by their subject dfs and then writing new dfs for each participant
 datA<-split.data.frame(`4.26.SS.A.csv`, `4.26.SS.A.csv`$session.subject.subject.code)
@@ -322,7 +325,8 @@ rm(compile_symm_span_data, symm_span_processing,combineddf,CombinedSS)#Just remo
 ```
 
 ```{r,ShapeBuilder}
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Shape Builder\\data")
+# Set the working directory of R to the folder that hosts the raw Shape Builder Data
+# setwd("C:\\Users\\PC-user\\Desktop\\Shape Builder\\data")
 folderdir<-dir()#use directory
 
 read_csv_filename <- function(filename){
@@ -337,7 +341,8 @@ colnames(CombinedShape)[1]<-"Shape"
 ```
 
 ```{r,Modular Arithmetic}
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Mod task\\data")
+# Set the working directory of R to the folder that hosts the raw Modular Arithmetic Data
+# setwd("C:\\Users\\PC-user\\Desktop\\Modular Arithmetic\\data")
 folderdir<-dir()#use directory
 CombinedMA <- do.call(plyr::rbind.fill,lapply(folderdir,read.csv))#combine data frames in folderdir into the object CombinedMA
 #get manipulation for each participant
@@ -363,8 +368,10 @@ CombinedMA2<-CombinedMA %>%
 rm(CombinedMA)
 ```
 
+## Analysis
 ```{r,Merge all data into master data set}
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\MT_Analysis")
+# Set the working directory of R to the folder that hosts the raw MT analysis Data
+# setwd("C:\\Users\\PC-user\\Desktop\\MT analysis\\data")
 #Merging all data sets
 masterappend<-Reduce(function(x, y) merge(x, y, all=TRUE), list(CombinedAA,CombinedSS2,CombinedShape,CombinedMA2))#uses the merge function on each item in the list
 masterappend<-masterappend[!(masterappend$Id==11),]#taking out Id 11 since they didn't do AA at all
@@ -408,7 +415,6 @@ plot(model.lm)
 ```
 
 ```{r,Mediation analysis}
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\MT_Analysis")
 library(apaTables)
 ###Baron and Kenny's method with regression
 #Cond1
@@ -536,9 +542,7 @@ summary(m1Condition23)
 apa.reg.table(m1Condition23,filename="m1Condition2.3Table.doc",table.number = 3)
 ```
 
-```{r,Sensitivity Analysis}
-#s.out  <- medsens(m.out)
-#summary(s.out)# the summary function can be used to produce a table with the values of ?? for which the confidence interval contains zero. As we can see in the plot of the sensitivity analysis as ACME(p) takes on the value .5 rho is .4 and as it takes the value -.0229 rho is .5. When it is 0 we are estimating the mediation effect under the sequential ignorability assumption
-#plot(s.out, sens.par = "rho")# In the plot, the dashed horizontal line represents the estimated mediation effect under the sequential ignorability assumption, and the solid line represents the mediation effect under various values of ??. The grey region represents the 95% confidence bands
-#plot(s.out, sens.par = "R2", r.type = "residual", sign.prod = "positive")
+```{r}
+rm(sobel)
 ```
+
