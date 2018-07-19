@@ -7,7 +7,7 @@ output:
   pdf_document: default
 ---
 
-```{r, Approximate arithmetic}
+```{r,Approximate arithmetic}
 setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Approximate Arithmetic\\data")
 library(tools)
 folderdir<-dir()#use directory
@@ -31,7 +31,7 @@ colnames(CombinedAA)[2]<-"AA.Accuracy"
 colnames(CombinedAA)[3]<-"AA.RT"
 ```
 
-```{r, Symmetry Span}
+```{r,Symmetry Span}
 # Set the working directory of R to the folder that hosts the output files from the symmetry span task #
 setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Symmetry Span\\data")
 #Reads in all the csv files in the current wd and rbinds them into one big data frame
@@ -321,7 +321,7 @@ colnames(CombinedSS2)<-c("prop.score","Id")
 rm(compile_symm_span_data, symm_span_processing,combineddf,CombinedSS)#Just removing some data frames that are unnecessary
 ```
 
-```{r, ShapeBuilder}
+```{r,ShapeBuilder}
 setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\Shape Builder\\data")
 folderdir<-dir()#use directory
 
@@ -363,7 +363,7 @@ CombinedMA2<-CombinedMA %>%
 rm(CombinedMA)
 ```
 
-```{r, Merge all data into master data set}
+```{r,Merge all data into master data set}
 setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\MT_Analysis")
 #Merging all data sets
 masterappend<-Reduce(function(x, y) merge(x, y, all=TRUE), list(CombinedAA,CombinedSS2,CombinedShape,CombinedMA2))#uses the merge function on each item in the list
@@ -377,41 +377,53 @@ VSWM <- composite(vars, rel = TRUE,Zitems = TRUE)
 rm(vars)#removing vars because it is extra
 #Visuospatial working z-score composite of Symmetry span and Shape Builder
 masterappend$VSWM<-VSWM#inserting z-score comp into master data sheet for analysis
-myvars <- c("AA.Accuracy","AA.RT","prop.score","Shape","MA.Accuracy", "MA.ReactionTime","VSWM")
+colnames(masterappend) <- c("Id", "Approx.Acc.", "Approx.RT","prop.score","Shape","Mod.Acc.","Mod.RT","VSWM")  
+myvars <- c("Approx.Acc.","Approx.RT","prop.score","Shape","Mod.Acc.", "Mod.RT","VSWM")
 write.table(masterappend,paste0(getwd(),'/masterappend.csv'), sep=",",row.names=FALSE)#overwritting current excel sheet
 
 #standardizing data for analysis
-masterappend$AA.Accuracy<-scale(masterappend$AA.Accuracy)
-masterappend$MA.Accuracy<-scale(masterappend$MA.Accuracy)
+masterappend$Approx.Acc.<-scale(masterappend$Approx.Acc.)
+masterappend$Mod.Acc.<-scale(masterappend$Mod.Acc.)
 masterappend$VSWM<-scale(masterappend$VSWM)
-masterappend$MA.ReactionTime<-scale(masterappend$MA.ReactionTime)
-masterappend$AA.RT<-scale(masterappend$AA.RT)
+masterappend$Mod.RT<-scale(masterappend$Mod.RT)
+masterappend$Approx.RT<-scale(masterappend$Approx.RT)
 ```
 
-```{r, Correlogram and Correlation Table}
+```{r,Correlogram and Correlation Table}
 library(corrgram)
-myvars <- c("AA.Accuracy","MA.Accuracy","VSWM")
+myvars <- c("Approx.Acc.","Mod.Acc.","VSWM")
 #cor(newdata)#correlaiton table
-corrgram(masterappend[myvars], labels=c("ANS Acc", "Modular Arithmetic Acc", "Visuospatial WM Acc"),lower.panel=panel.pts, upper.panel=panel.conf,
+corrgram(masterappend[myvars], labels=c("Approximate Arithmetic", "Modular Arithmetic", "Visuospatial WM Accuracy"),lower.panel=panel.pts, upper.panel=panel.conf,
          diag.panel=panel.density, main="Correlogram of all variables")
-# For apa tables below
-library(apaTables)
-apa.cor.table(masterappend[myvars], filename = "CorrelationTable.doc", table.number = 0)
+#apa.cor.table(masterappend[myvars], filename = "CorrelationTable.doc", table.number = 0)
 ```
 
-```{r, Mediation analysis}
-setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\MT_Analysis")
+```{r,Residual Analysis}
+library(influence.ME)
+model.lm <- lm(Mod.Acc.~Approx.Acc.+VSWM,data=masterappend)
+inf_meas<-influence.measures(model.lm)
+inf_meas
+hist(model.lm$residuals)#multi-modal
+plot(model.lm)
+```
 
+```{r,Mediation analysis}
+setwd("C:\\Users\\flyff\\Desktop\\LAB\\MT\\MT study\\MT_Analysis")
+library(apaTables)
 ###Baron and Kenny's method with regression
 #Cond1
-m1Condition1<-lm(MA.Accuracy~AA.Accuracy,data=masterappend)
+m1Condition1<-lm(Mod.Acc.~Approx.Acc.,data=masterappend)
+summary(m1Condition1)
 apa.reg.table(m1Condition1,filename="m1Condition1Table.doc",table.number = 1)
 #Cond2
-m1Condition2<-lm(VSWM~AA.Accuracy,data=masterappend)
+m1Condition2<-lm(VSWM~Approx.Acc.,data=masterappend)
+summary(m1Condition2)
+
 apa.reg.table(m1Condition2,filename="m1Condition2Table.doc",table.number = 2)
 
 #Cond3
-m1Condition3<-lm(MA.Accuracy~AA.Accuracy+VSWM,data=masterappend)
+m1Condition3<-lm(Mod.Acc.~Approx.Acc.+VSWM,data=masterappend)
+summary(m1Condition3)
 apa.reg.table(m1Condition3,filename="m1Condition3Table.doc",table.number = 3)
 
 # Empirical M-test
@@ -424,7 +436,7 @@ se.a = summary(m1Condition2)$coefficients[2,2]
 b = summary(m1Condition3)$coefficients[3,1]
 se.b = summary(m1Condition3)$coefficients[3,2]
 res<-medci(mu.x=a, mu.y=b, se.x=se.a, se.y=se.b, rho=0, alpha=.05,
-      type="prodclin", plot=TRUE, plotCI=TRUE)#essentially the same as nonparametric boostrap confidence intervals because all the predictors are continuous 
+      type="prodclin", plot=TRUE, plotCI=TRUE, title(main = "Confidence Interval for the Mediated Effect"))#essentially the same as nonparametric boostrap confidence intervals because all the predictors are continuous 
 ```
 
 ```{r,Nonparametric Bootstrap Confidence Intervals}
@@ -440,16 +452,15 @@ lmT<- lm(MA.Accuracy ~ AA.Accuracy +VSWM, data=masterappend)# Outcome model
     #col = "black")
 ```
 
-```{r,Estimate and display direct and indirect effects of mediators }
+```{r,Estimate and display direct and indirect effects of mediators}
 library(psych)
-# Analyses 
-#m.1<-mediate(y="MA.Accuracy",x="AA.Accuracy",m="VSWM",data=masterappend,n.iter = 10000,std = FALSE)
-#mediate.diagram(m.1,main = "Mediation Model with VSWM Composite",r.type="residual", labels("1"))
+m.1<-mediate(y="Mod.Acc",x="Approx.Acc.",m="VSWM",data=masterappend,n.iter =10000,std = FALSE)
+mediate.diagram(m.1,main = "Mediation Model with VSWM Composite",r.type="residual")
 ```
 
-```{r, Bayesian Model Comparison}
+```{r,Bayesian Model Comparison}
 library(BayesFactor)
-Models<-generalTestBF(MA.Accuracy~AA.Accuracy+VSWM,data=masterappend)
+Models<-generalTestBF(Mod.Acc.~Approx.Acc.+VSWM,data=masterappend)
 Models
 # plot of all models predicting modular arithmetic
 plot(Models)
@@ -463,23 +474,16 @@ M1M3 <-Models[1]/Models[3]
 M2M3 <- Models[2]/Models[3] 
 ```
 
-```{r,Sensitivity Analysis}
-#s.out  <- medsens(m.out)
-#summary(s.out)# the summary function can be used to produce a table with the values of ?? for which the confidence interval contains zero. As we can see in the plot of the sensitivity analysis as ACME(p) takes on the value .5 rho is .4 and as it takes the value -.0229 rho is .5. When it is 0 we are estimating the mediation effect under the sequential ignorability assumption
-#plot(s.out, sens.par = "rho")# In the plot, the dashed horizontal line represents the estimated mediation effect under the sequential ignorability assumption, and the solid line represents the mediation effect under various values of ??. The grey region represents the 95% confidence bands
-#plot(s.out, sens.par = "R2", r.type = "residual", sign.prod = "positive")
-```
-
-```{r,Dominance Analysis}
+```{r,Robustness Analysis}
 library(gvlma)
-model.lm <- lm(MA.Accuracy~AA.Accuracy+VSWM,data=masterappend) 
+model.lm <- lm(Mod.Acc.~Approx.Acc.+VSWM,data=masterappend) 
 gv.fit<-gvlma(model.lm)
 gv.fit
 deletion.gvlma(gv.fit)#Fitted the model with and without each observation identifying observations that violate assumptions of a linear model, to identify problematic data points. It identified line 19 and 96 for deletion which is subject 14 and 84 respectively.
 
 shapiro.test(gv.fit$residuals)# Through the shapiro-wilk normality test we see this lm has a p value more than .05 so we cannot reject normality of this distribution
 library(yhat)
-all.subsets.reg<-aps(masterappend,"MA.Accuracy",list("AA.Accuracy","VSWM")) #DV and list of IVs
+all.subsets.reg<-aps(masterappend,"Mod.Acc.",list("Approx.Acc.","VSWM")) #DV and list of IVs
 dom.model<-dominance(all.subsets.reg)
 dom.model$DA#Dominance analysis table
 dom.model$CD#conditional dominance
@@ -487,12 +491,54 @@ dom.model$GD#general dominance
 dombin(dom.model)#dom analysis
 plot(gv.fit)
 ```
+#Appendix C Analysis of first 102 complete data 
+```{r}
+masterappend2 <- masterappend2[!(masterappend2$Id==104),]
+masterappend2 <- masterappend2[!(masterappend2$Id==105),]
+masterappend2 <- masterappend2[!(masterappend2$Id==106),]
+masterappend2 <- masterappend2[!(masterappend2$Id==107),]
+masterappend2 <- masterappend2[!(masterappend2$Id==108),]
+masterappend2 <- masterappend2[!(masterappend2$Id==109),]
+masterappend2 <- masterappend2[!(masterappend2$Id==110),]
+masterappend2 <- masterappend2[!(masterappend2$Id==111),]
+masterappend2 <- masterappend2[!(masterappend2$Id==112),]
+masterappend2 <- masterappend2[!(masterappend2$Id==113),]
 
-```{r,Residual Analysis}
-library(influence.ME)
-inf_meas<-influence.measures(model.lm)
-inf_meas
-hist(model.lm$residuals)#multi-modal
-plot(model.lm)
+library(BayesFactor)
+Models2<-generalTestBF(Mod.Acc.~Approx.Acc.+VSWM,data=masterappend2)
+Models2
+Models2[2]/Models2[3]
 ```
 
+```{r}
+library(psych)
+m.2<-mediate(y="Mod.Acc.",x="Approx.Acc.",m="VSWM",data=masterappend2,n.iter =10000,std = FALSE)
+mediate.diagram(m.2,main = "Mediation Model with VSWM Composite for 102",r.type="residual")
+```
+```{r,Mediation analysis}
+library(apaTables)
+###Baron and Kenny's method with regression
+#Cond1
+m1Condition12<-lm(Mod.Acc.~Approx.Acc.,data=masterappend2)
+summary(m1Condition12)
+
+apa.reg.table(m1Condition12,filename="m1Condition1.2Table.doc",table.number = 1)
+#Cond2
+m1Condition22<-lm(VSWM~Approx.Acc.,data=masterappend2)
+summary(m1Condition22)
+
+apa.reg.table(m1Condition22,filename="m1Condition2.2Table.doc",table.number = 2)
+
+#Cond3
+m1Condition23<-lm(Mod.Acc.~Approx.Acc.+VSWM,data=masterappend2)
+summary(m1Condition23)
+
+apa.reg.table(m1Condition23,filename="m1Condition2.3Table.doc",table.number = 3)
+```
+
+```{r,Sensitivity Analysis}
+#s.out  <- medsens(m.out)
+#summary(s.out)# the summary function can be used to produce a table with the values of ?? for which the confidence interval contains zero. As we can see in the plot of the sensitivity analysis as ACME(p) takes on the value .5 rho is .4 and as it takes the value -.0229 rho is .5. When it is 0 we are estimating the mediation effect under the sequential ignorability assumption
+#plot(s.out, sens.par = "rho")# In the plot, the dashed horizontal line represents the estimated mediation effect under the sequential ignorability assumption, and the solid line represents the mediation effect under various values of ??. The grey region represents the 95% confidence bands
+#plot(s.out, sens.par = "R2", r.type = "residual", sign.prod = "positive")
+```
