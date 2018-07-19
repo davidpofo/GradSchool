@@ -521,7 +521,7 @@ library(psych)
 m.2<-mediate(y="Mod.Acc.",x="Approx.Acc.",m="VSWM",data=masterappend2,n.iter =10000,std = FALSE)
 mediate.diagram(m.2,main = "Mediation Model with VSWM Composite for 102",r.type="residual")
 ```
-```{r,Mediation analysis}
+```{r,Mediation analysis2}
 library(apaTables)
 ###Baron and Kenny's method with regression
 #Cond1
