@@ -1,0 +1,159 @@
+---
+title: "Masters Thesis Analysis"
+author: "david ampofo"
+date: "August 3, 2018"
+output: html_document
+---
+## Planned Analyses
+```{r,Master Sheet Standardizing data for analysis}
+# Set the working directory of R to the folder that hosts the raw MT analysis Data
+# setwd("C:\\Users\\PC-user\\Desktop\\MT analysis\\data")
+MasterSheet$Approx.Acc. <- scale(MasterSheet$Approx.Acc.)# Standardizes Approximate Arithmetic Accuracy
+MasterSheet$Mod.Acc. <- scale(MasterSheet$Mod.Acc.)# Standardizes Modular Arithmetic Accuracy
+MasterSheet$VSWM <-scale(MasterSheet$VSWM)# Standardizes Visuospatial Working Memory Accuracy
+MasterSheet$Mod.RT <- scale(MasterSheet$Mod.RT)# Standardizes Modular Arithmetic Reaction Time
+MasterSheet$Approx.RT <- scale(MasterSheet$Approx.RT)# Standardizes Approximate Arithmetic Reaction Time
+```
+
+```{r,Baron and Kenny Mediation Approach}
+library(apaTables)
+# Condition 1
+DirectModel <- lm(Mod.Acc.~Approx.Acc., data=MasterSheet)#c path
+summary(DirectModel)
+apa.reg.table(DirectModel,filename="DirectModelTable.doc",table.number = 1)
+
+# Condition 2
+MediatorModel <- lm(VSWM~Approx.Acc., data=MasterSheet)# a path
+summary(MediatorModel)
+apa.reg.table(MediatorModel,filename="MediatorModelTable.doc",table.number = 2)
+
+# Condition 3
+OutcomeModel <-lm(Mod.Acc.~Approx.Acc.+VSWM, data=MasterSheet)# b,c' paths
+summary(OutcomeModel)
+apa.reg.table(OutcomeModel,filename="OutcomeModelTable.doc",table.number = 3)
+```
+
+```{r, Empirical M-test}
+# Confidence Interval for the Mediated Effect
+library(RMediation)
+# Unstandardized coefficients
+a = summary(MediatorModel)$coefficients[2,1]
+se.a = summary(MediatorModel)$coefficients[2,2]
+b = summary(OutcomeModel)$coefficients[3,1]
+se.b = summary(OutcomeModel)$coefficients[3,2]
+plot.new()#To Create / Start a New Plot Frame
+
+res<-medci(mu.x=a, mu.y=b, se.x=se.a, se.y=se.b, rho=0, alpha=.05,
+      type="prodclin", plot=TRUE, plotCI=TRUE, title(main = "Confidence Interval for the Mediated Effect"))#Plots the Confidence Interval for the Mediated Effect
+rm(a,b,se.a,se.b)#Removing extra values
+```
+
+```{r,Nonparametric Bootstrap Confidence Intervals}
+library(mediation)
+set.seed(2018)#If the seed isn't set each time mediate is run the results will be slightly different each run because of Monte Carlo errors. 
+cont.boot<- mediate(MediatorModel, OutcomeModel,  boot=TRUE, sims=10000, treat="Approx.Acc.", mediator="VSWM")# 10,000 simulations of Nonparametric Boostrapped Confidence Intervals
+summary(cont.boot)
+```
+
+```{r,Estimate and display direct and indirect effects of mediators}
+detach("package:mediation", unload=TRUE)#the name mediate is shared between the mediation and psych libraries
+library(psych)
+set.seed(2018)#If the seed isn't set each time mediate is run the results will be slightly different each run because of Monte Carlo errors. 
+m.1 <- mediate(Mod.Acc. ~ Approx.Acc. + (VSWM), data=MasterSheet,n.iter =10000,std = FALSE)
+mediate.diagram(m.1,main = "Mediation Model with VSWM Composite",r.type="residual")
+```
+
+```{r,Nonparametric Bootstrap Confidence Intervals, for VSWM components}
+set.seed(2018)#If the seed isn't set each time mediate is run the results will be slightly different each run because of Monte Carlo errors. 
+library(mediation)
+MediatorModel_Comp<- lm(Mod.Acc. ~ Approx.Acc. + Shape + prop.score, data=MasterSheet)# Outcome model
+
+m.out <- mediate(MediatorModel_Comp, OutcomeModel, treat="Approx.Acc.", mediator=c("prop.score","Shape"), boot=TRUE, sims=1000)
+summary(m.out)
+
+plot(contcont.boot, treatment = NULL, labels = NULL,
+    effect.type = c("indirect","direct","total"),
+    xlim = NULL, ylim = NULL, xlab = "", ylab = "",
+    main = "Confidence Interval plot for Mediation Analysis", lwd = 1.5, cex = .85,
+    col = "black")
+m.2 <- mediate(Mod.Acc. ~ Approx.Acc. + (Shape) + (prop.score), data=MasterSheet,n.iter =10000,std = FALSE)
+mediate.diagram(m.2,main = "Mediation Model with VSWM Components")
+```
+
+```{r,Bayesian Model Comparison}
+Bayes_MasterSheet <- data.frame(MasterSheet)#The Master data sheet is not formated in a data frame from when it was written so this will accomplish this in order to perform Bayesian model comparison
+library(BayesFactor)
+Models<-generalTestBF(Mod.Acc.~Approx.Acc. + VSWM,data=Bayes_MasterSheet)
+Models #All three possible models predicting Modular Arithmetic Accuracy (Mod. Acc.)
+
+#Make row name (Model variables) into column
+library(dplyr)
+BayesTable <- tibble::rownames_to_column(as.data.frame(Models), "Model")# Makes a nice excel ready data frame
+write.table(BayesTable,paste0(getwd(),'/BayesTable.csv'), sep=",",row.names=FALSE)#overwritting current excel sheet
+# Comparisons
+
+M1M2 <- Models[1]/Models[2] # The Bayesian Analoge to the c' path 
+M1M2
+
+M1M3 <-Models[1]/Models[3]# Compares the single predictor model Approximate arithmetic over the multiple regression of Approximate Arithmetic and Visuospatial Working Memory which is not particularly useful in the Mediation frame work
+M1M3
+
+M2M3 <- Models[2]/Models[3]# The Bayesian Analoge to the b path 
+M2M3
+
+VSWM_model<-generalTestBF(VSWM ~ Approx.Acc.,data=Bayes_MasterSheet)# The Bayesian Analoge to the a path
+VSWM_model
+```
+
+```{r,Correlogram and Correlation Table}
+library(corrgram)
+myvars <- c("Approx.Acc.","Mod.Acc.","VSWM")# A concatenated list of variables for Correlogram
+#cor(newdata)#correlaiton table
+corrgram(MasterSheet[myvars], labels=c("Approximate Arithmetic Accuracy", "Modular Arithmetic Accuracy", "Visuospatial WM Accuracy"),lower.panel=panel.pts, upper.panel=panel.conf,
+         diag.panel=panel.density, main="Correlogram of all variables")
+```
+
+# Appendix C Analysis of first 102 complete data 
+```{r}
+MasterSheet2 <- MasterSheet
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==104),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==105),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==106),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==107),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==108),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==109),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==110),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==111),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==112),]
+MasterSheet2 <- MasterSheet2[!(MasterSheet2$Id==113),]
+```
+
+```{r, Mediation Model for first 102}
+library(psych)# A package for personality, psychometric, and psychological research
+set.seed(2018)
+m.102 <- mediate(Mod.Acc. ~ Approx.Acc. + (VSWM), data=MasterSheet2,n.iter =10000,std = FALSE)# 10,000 simulations of Nonparametric Boostrapped Confidence Intervals for the first 102 subjects
+mediate.diagram(m.102,main = "Mediation Model with VSWM Composite for 102")# Adds a nice title to the diagram automatically produced with mediate
+```
+
+## Exploratory Analyses
+```{r,Robustness Analysis}
+library(gvlma)# A library that helps one perform a Global Validation of Linear Model Assumptions 
+gv.fit <- gvlma(OutcomeModel) # This creates a Gvlma Object from the Outcome Model lm(Mod.Acc.~Approx.Acc.+VSWM)
+gv.fit
+deletion.gvlma(gv.fit)#Fitted the model with and without each observation identifying observations that violate assumptions of a linear model, to identify problematic data points. It identified line 19 and 96 for deletion which is subject 14 and 84 respectively.
+
+shapiro.test(gv.fit$residuals)# Through the shapiro-wilk normality test we see this lm has a p value more than .05 so we cannot reject normality of this distribution
+library(yhat)# Provides methods to interpret regression effects
+all.subsets.reg <- aps(MasterSheet,"Mod.Acc.",list("Approx.Acc.","VSWM")) #All Possible Subsets Regression with the DV and list of IVs
+dom.model <- dominance(all.subsets.reg)# Computes dominance weights including conditional and general.
+dom.model$GD#General Dominance results, show that VSWM has achieved complete dominance over Approximate Airthmetic because its contribution is greater across the average of all conditional values as compared with the Approximate Arithmetic. 
+```
+
+
+```{r,Residual Analysis}
+library(influence.ME)
+inf_meas<-influence.measures(OutcomeModel)
+inf_meas
+hist(model.lm$residuals)
+plot(model.lm)
+```
