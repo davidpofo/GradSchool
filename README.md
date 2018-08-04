@@ -2,7 +2,9 @@
 
 This is a respository for my Cognitive and Neural Systems Masters Thesis at the University of Maryland. David Ampofo
 The R Markdown files were formatted with the funtions from 'formatR' for easy reading (Yihui Xie,2017-12-07)
+
 The files contain the following:
+
 AA_SS_Shape_Mod_process.Rmd
 -Processing scripts for the raw form of each task used in this study that is then merged into a master data sheet.
 1) Approximate Arithmetic
