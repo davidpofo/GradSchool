@@ -13,6 +13,9 @@ AA_SS_Shape_Mod_process.Rmd
 4) Modular Arithmetic
 5) Merging
 
+MasterSheet.csv
+The processed master data sheet in CSV
+
 Masters Thesis Analysis.Rmd
 -All Planned Analyses 
 -All Exploratory analyses
