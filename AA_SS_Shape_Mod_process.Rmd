@@ -369,6 +369,6 @@ MasterSheet$VSWM<-VSWM#inserting z-score comp into master data sheet for analysi
 colnames(MasterSheet) <- c("Id", "Approx.Acc.", "Approx.RT","prop.score","Shape","Mod.Acc.","Mod.RT","VSWM")#changing column names  
 rm(vars,VSWM)#removing extra variables
 
-write.table(MasterSheet,paste0(getwd(),'/MasterSheet.csv'), sep=",",row.names=FALSE)#overwritting current excel sheet
+write.table(MasterSheet,paste0(getwd(),'/MasterSheet.csv'), sep=",",row.names=FALSE)# Writes the Master data sheet into a csv file which can be opened with excel
 ```
 
