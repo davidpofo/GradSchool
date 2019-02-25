@@ -1,0 +1,125 @@
+"MA_practice","corrAns","corrAns2","MA_baseline","MA_exp","corrAns3","Practice_trials.thisRepN","Practice_trials.thisTrialN","Practice_trials.thisN","Practice_trials.thisIndex","Baseline_block.thisRepN","Baseline_block.thisTrialN","Baseline_block.thisN","Baseline_block.thisIndex","experimental_block.thisRepN","experimental_block.thisTrialN","experimental_block.thisN","experimental_block.thisIndex","session_number_key.keys","session_number_key.corr","session_number_key.rt","trial_key.keys","trial_key.corr","trial_key.rt","basetrial_key.keys","basetrial_key.corr","basetrial_key.rt","Mani_key.keys","Mani_key.rt","exptrial_key.keys","exptrial_key.corr","exptrial_key.rt","date","frameRate","expName","session","participant","X"
+"","","","","","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,1,1,1.19433765495,"",NA,NA,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"45=27 (mod 4)","m","","","","",0,0,0,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",0,6.24749790606,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"39=35 (mod 8) ","m","","","","",0,1,1,9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",0,3.26534210877,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"9=3 (mod 6)","z","","","","",0,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",1,2.34917841169,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"19=12 (mod 7)","z","","","","",0,3,3,8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",1,1.93267525389,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"7=2 (mod 5)","z","","","","",0,4,4,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",1,1.51619449351,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"27=22 (mod 3)","m","","","","",0,5,5,11,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",1,3.11548664204,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"98=44 (mod 3)","z","","","","",0,6,6,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",0,1.81609020557,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"56=52 (mod 4)","z","","","","",0,7,7,10,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",1,1.43288406308,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"44=16 (mod 3)","m","","","","",0,8,8,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",0,2.09882670238,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"51=19 (mod 4)","z","","","","",0,9,9,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",1,1.71610956998,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"8=5 (mod 4)","m","","","","",0,10,10,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",1,1.09972259875,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"6=1 (mod 3)","m","","","","",0,11,11,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",0,2.61585503277,"",NA,NA,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","67=33 (mod 2)","62=32 (mod 3)","z",NA,NA,NA,NA,0,0,0,8,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,1.9660492603,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","6=3 (mod 3)","5=2 (mod 3)","z",NA,NA,NA,NA,0,1,1,0,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,9.37891454669e-05,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","84=76 (mod 5)","88=79 (mod 5)","m",NA,NA,NA,NA,0,2,2,19,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,1.21629598177,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","7=4 (mod 4)","7=1 (mod 4)","m",NA,NA,NA,NA,0,3,3,5,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,9.19227022678e-05,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","33=27 (mod 6)","31=25 (mod 6)","z",NA,NA,NA,NA,0,4,4,20,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,2.74885551572,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","42=22 (mod 5)","49=24 (mod 5)","z",NA,NA,NA,NA,0,5,5,10,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,8.39902932057e-05,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","8=4 (mod 5)","8=3 (mod 5)","m",NA,NA,NA,NA,0,6,6,1,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,2.31594485571,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","54=43 (mod 4)","50=41 (mod 3)","m",NA,NA,NA,NA,0,7,7,15,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,1.51606197549,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","50=21 (mod 6)","50=29 (mod 5)","m",NA,NA,NA,NA,0,8,8,9,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,2.48250225725,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","59=57 (mod 3)","54=52 (mod 3)","m",NA,NA,NA,NA,0,9,9,21,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,2.34913268365,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","65=33 (mod 8)","67=37 (mod 5)","z",NA,NA,NA,NA,0,10,10,14,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,1.84937275588,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","5=2 (mod 3)","6=4 (mod 2)","z",NA,NA,NA,NA,0,11,11,6,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,2.94885878201,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","61=56 (mod 5)","64=59 (mod 5)","z",NA,NA,NA,NA,0,12,12,18,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,1.64949640825,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","6=4 (mod 3) ","8=2 (mod 3) ","m",NA,NA,NA,NA,0,13,13,7,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,1.5167087007,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","77=42 (mod 4)","74=49 (mod 4)","m",NA,NA,NA,NA,0,14,14,11,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,2.04916977936,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","4=1 (mod 3)","8=6 (mod 2)","z",NA,NA,NA,NA,0,15,15,4,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,1.08297820219,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","95=58 (mod 3)","95=58 (mod 3)","z",NA,NA,NA,NA,0,16,16,12,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,2.01595768756,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","85=74(mod 5)","85=74 (mod 5)","m",NA,NA,NA,NA,0,17,17,13,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,1.59939387011,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","68=63 (mod 4)","69=64 (mod 4)","m",NA,NA,NA,NA,0,18,18,23,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,1.21631371306,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","18=11 (mod 7)","15=11 (mod 4)","z",NA,NA,NA,NA,0,19,19,16,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,1.69947156112,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","22=18 (mod 4)","26=22 (mod 4)","z",NA,NA,NA,NA,0,20,20,22,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,1.19966963821,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","6=3 (mod 2)","9=7 (mod 4)","m",NA,NA,NA,NA,0,21,21,3,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,1.76611085318,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","78=74 (mod 2)","77=73 (mod 2)","m",NA,NA,NA,NA,0,22,22,17,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,1.46618294485,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","9=2 (mod 7)","8=4 (mod 4)","z",NA,NA,NA,NA,0,23,23,2,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,1.11638673794,"",NA,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","","","","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"",NA,NA,"space",11.2121183983,"",NA,NA,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","67=33 (mod 2)","62=32 (mod 3)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,0,0,8,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,1.61614479925,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","4=1 (mod 3)","8=6 (mod 2)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,1,1,4,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,0.849878097433,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","95=58 (mod 3)","95=58 (mod 3)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,2,2,12,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,2.38224725341,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","8=4 (mod 5)","8=3 (mod 5)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,3,3,1,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,1.91612310176,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","42=22 (mod 5)","49=24 (mod 5)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,4,4,10,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,1.76611411945,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","54=43 (mod 4)","50=41 (mod 3)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,5,5,15,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,1.5995515852,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","50=21 (mod 6)","50=29 (mod 5)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,6,6,9,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,1.89939783631,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","7=4 (mod 4)","7=1 (mod 4)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,7,7,5,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,2.59907610687,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","22=18 (mod 4)","26=22 (mod 4)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,8,8,22,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,1.83271841556,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","5=2 (mod 3)","6=4 (mod 2)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,9,9,6,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,1.36627136794,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","61=56 (mod 5)","64=59 (mod 5)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,10,10,18,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",0,1.41622085712,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","84=76 (mod 5)","88=79 (mod 5)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,11,11,19,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,1.63264002465,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","65=33 (mod 8)","67=37 (mod 5)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,12,12,14,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",0,2.0993236449,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","33=27 (mod 6)","31=25 (mod 6)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,13,13,20,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,2.0159814848,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","59=57 (mod 3)","54=52 (mod 3)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,14,14,21,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,2.1326309257,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","78=74 (mod 2)","77=73 (mod 2)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,15,15,17,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,1.53300608229,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","18=11 (mod 7)","15=11 (mod 4)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,16,16,16,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,2.54913455011,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","6=3 (mod 2)","9=7 (mod 4)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,17,17,3,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,2.84908392263,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","77=42 (mod 4)","74=49 (mod 4)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,18,18,11,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,2.93229496454,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","6=3 (mod 3)","5=2 (mod 3)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,19,19,0,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,2.11589399494,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","6=4 (mod 3) ","8=2 (mod 3) ","m",NA,NA,NA,NA,NA,NA,NA,NA,0,20,20,7,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,1.34963009278,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","z","9=2 (mod 7)","8=4 (mod 4)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,21,21,2,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,1.21631604612,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","68=63 (mod 4)","69=64 (mod 4)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,22,22,23,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,3.63191910801,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","m","85=74(mod 5)","85=74 (mod 5)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,23,23,13,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,2.14925633601,"2016_Sep_15_1604",60.0280939,"MA task",NA,"taylor",NA
+"","","","","","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0,0,3.93203418286,"",NA,NA,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"9=3 (mod 6)","z","","","","",0,0,0,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",1,5.84795323998,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"6=1 (mod 3)","m","","","","",0,1,1,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",1,3.83207219318,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"45=27 (mod 4)","m","","","","",0,2,2,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",1,6.29778622941,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"44=16 (mod 3)","m","","","","",0,3,3,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",0,11.2626204516,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"19=12 (mod 7)","z","","","","",0,4,4,8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",0,2.93241795496,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"98=44 (mod 3)","z","","","","",0,5,5,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",0,3.0324195693,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"8=5 (mod 4)","m","","","","",0,6,6,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",0,2.7824911138,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"7=2 (mod 5)","z","","","","",0,7,7,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",1,2.5993037802,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"39=35 (mod 8) ","m","","","","",0,8,8,9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",1,3.06571491677,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"51=19 (mod 4)","z","","","","",0,9,9,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"m",0,6.86425218009,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"27=22 (mod 3)","m","","","","",0,10,10,11,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",0,3.6153653393,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"56=52 (mod 4)","z","","","","",0,11,11,10,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"z",1,2.79930333991,"",NA,NA,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","6=3 (mod 2)","9=7 (mod 4)","m",NA,NA,NA,NA,0,0,0,3,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,2.28267272678,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","84=76 (mod 5)","88=79 (mod 5)","m",NA,NA,NA,NA,0,1,1,19,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,0.504805956618,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","22=18 (mod 4)","26=22 (mod 4)","z",NA,NA,NA,NA,0,2,2,22,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,4.73175835126,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","77=42 (mod 4)","74=49 (mod 4)","m",NA,NA,NA,NA,0,3,3,11,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,7.03085769759,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","9=2 (mod 7)","8=4 (mod 4)","z",NA,NA,NA,NA,0,4,4,2,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,2.09941421555,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","85=74(mod 5)","85=74 (mod 5)","m",NA,NA,NA,NA,0,5,5,13,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,3.76542903224,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","68=63 (mod 4)","69=64 (mod 4)","m",NA,NA,NA,NA,0,6,6,23,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,4.16531624875,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","8=4 (mod 5)","8=3 (mod 5)","m",NA,NA,NA,NA,0,7,7,1,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,3.11570251572,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","54=43 (mod 4)","50=41 (mod 3)","m",NA,NA,NA,NA,0,8,8,15,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,2.71587180103,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","33=27 (mod 6)","31=25 (mod 6)","z",NA,NA,NA,NA,0,9,9,20,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,2.28267382749,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","18=11 (mod 7)","15=11 (mod 4)","z",NA,NA,NA,NA,0,10,10,16,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,1.89951114921,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","95=58 (mod 3)","95=58 (mod 3)","z",NA,NA,NA,NA,0,11,11,12,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,1.96612128959,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","7=4 (mod 4)","7=1 (mod 4)","m",NA,NA,NA,NA,0,12,12,5,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,1.5163070118,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","61=56 (mod 5)","64=59 (mod 5)","z",NA,NA,NA,NA,0,13,13,18,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,1.19978565998,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","5=2 (mod 3)","6=4 (mod 2)","z",NA,NA,NA,NA,0,14,14,6,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,2.18268578826,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","4=1 (mod 3)","8=6 (mod 2)","z",NA,NA,NA,NA,0,15,15,4,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,1.68293784506,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","59=57 (mod 3)","54=52 (mod 3)","m",NA,NA,NA,NA,0,16,16,21,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,1.83281955814,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","6=4 (mod 3) ","8=2 (mod 3) ","m",NA,NA,NA,NA,0,17,17,7,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,1.74956889846,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","50=21 (mod 6)","50=29 (mod 5)","m",NA,NA,NA,NA,0,18,18,9,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",1,3.14904225749,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","65=33 (mod 8)","67=37 (mod 5)","z",NA,NA,NA,NA,0,19,19,14,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"m",0,3.56554651199,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","42=22 (mod 5)","49=24 (mod 5)","z",NA,NA,NA,NA,0,20,20,10,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,2.93241355222,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","6=3 (mod 3)","5=2 (mod 3)","z",NA,NA,NA,NA,0,21,21,0,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,1.83286395243,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","78=74 (mod 2)","77=73 (mod 2)","m",NA,NA,NA,NA,0,22,22,17,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",0,1.99943241355,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","67=33 (mod 2)","62=32 (mod 3)","z",NA,NA,NA,NA,0,23,23,8,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"z",1,2.79912906482,"",NA,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","","","","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"",NA,NA,"",NA,NA,"space",16.3272607331,"",NA,NA,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","18=11 (mod 7)","15=11 (mod 4)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,0,0,16,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,4.24857938285,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","22=18 (mod 4)","26=22 (mod 4)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,1,1,22,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,4.61517418703,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","65=33 (mod 8)","67=37 (mod 5)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,2,2,14,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,1.6162675339,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","77=42 (mod 4)","74=49 (mod 4)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,3,3,11,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,2.61591458099,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","61=56 (mod 5)","64=59 (mod 5)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,4,4,18,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,3.76543380188,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","9=2 (mod 7)","8=4 (mod 4)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,5,5,2,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,2.49925667088,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","8=4 (mod 5)","8=3 (mod 5)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,6,6,1,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,2.68254600129,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","6=4 (mod 3) ","8=2 (mod 3) ","m",NA,NA,NA,NA,NA,NA,NA,NA,0,7,7,7,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,2.46602479623,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","6=3 (mod 2)","9=7 (mod 4)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,8,8,3,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,1.69961432007,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","6=3 (mod 3)","5=2 (mod 3)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,9,9,0,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,3.48222027197,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","85=74(mod 5)","85=74 (mod 5)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,10,10,13,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,2.43262048095,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","95=58 (mod 3)","95=58 (mod 3)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,11,11,12,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",0,2.76579335891,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","68=63 (mod 4)","69=64 (mod 4)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,12,12,23,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,3.53222621567,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","54=43 (mod 4)","50=41 (mod 3)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,13,13,15,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,1.99943021219,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","67=33 (mod 2)","62=32 (mod 3)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,14,14,8,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,4.56514366137,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","84=76 (mod 5)","88=79 (mod 5)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,15,15,19,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,4.31526840564,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","42=22 (mod 5)","49=24 (mod 5)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,16,16,10,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,3.69871689507,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","59=57 (mod 3)","54=52 (mod 3)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,17,17,21,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,1.64957608961,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","7=4 (mod 4)","7=1 (mod 4)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,18,18,5,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,1.88286622717,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","33=27 (mod 6)","31=25 (mod 6)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,19,19,20,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",0,3.76548369959,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","78=74 (mod 2)","77=73 (mod 2)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,20,20,17,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",0,1.84955803838,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","4=1 (mod 3)","8=6 (mod 2)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,21,21,4,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,1.69958313397,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","z","5=2 (mod 3)","6=4 (mod 2)","z",NA,NA,NA,NA,NA,NA,NA,NA,0,22,22,6,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"z",1,1.61630862614,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
+"","","m","50=21 (mod 6)","50=29 (mod 5)","m",NA,NA,NA,NA,NA,NA,NA,NA,0,23,23,9,NA,NA,NA,"",NA,NA,"",NA,NA,"",NA,"m",1,4.59852449538,"2016_Nov_11_1350",59.8990831373,"MA task",NA,"mike",NA
